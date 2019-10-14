@@ -1,0 +1,26 @@
+.content {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.header {
+    width: 100%;
+    background-image: url('/main.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px 100px;
+}
+
+.header-text {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 30px;
+    width: fit-content;
+}
+
+body {
+    padding-top: 0px;
+    padding-bottom: 70px;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments::head">
+    <meta charset="UTF-8">
+    <title>Edtuj skladnik</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<h1>Edycja skladnika</h1>
+<span>Nie podanie nazwy składnika lub wpisanie 0 dla ilości usunie skladnik</span>
+<form method="post" action="/edytujSkladnik" th:object="${component}">
+    <div class="form-group">
+        <label for="name">Nazwa sladnika</label>
+    <input  type="text" th:field="*{componentName}" placeholder="Nazwa" id="name">
+    </div>
+    <div class="form-group">
+        <label for="recipe">Ilosc</label>
+    <input  type="text" th:field="*{quantity}" placeholder="Nazwa" id="recipe">
+    </div>
+    <input  type="hidden" th:field="*{recipe.id}">
+    <input  type="hidden" th:field="*{id}">
+    <input type="submit" value="Zapisz zmniany">
+</form>
+</body>
+</html>

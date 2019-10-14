@@ -1,0 +1,3 @@
+--  INSERT INTO recipe(id, name, description, prepare_time, person, rating, category) VALUES (1, 'makaron', 'szybkie danie dla kazdego', 23, 4, 0, 0), (2, 'burger', 'szybkie danie dla kazdego', 23, 4, 0, 2)
+--  INSERT INTO component(id, component_name, recipe_id, quantity) VALUES (1, 'sol', 1, 23), (2, 'pieprz', 1, 230)
+--

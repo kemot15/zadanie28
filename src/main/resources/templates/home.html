@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments::head">
+    <meta charset="UTF-8">
+    <title>Książka kucharska</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<div th:replace="fragments :: header"></div>
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr th:field="*{categories}">
+        <th scope="col"><a href="/">Wszystko</a></th>
+        <th scope="col" th:each="category : ${categories}"><a th:href="'/?category=' + ${category.name()}" th:text="${category.categoryName}"></a></th>
+        <th scope="col">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/dodaj/">Dodaj przepis</a>
+                    <a class="dropdown-item" href="/ranking" >Ranking</a>
+                </div>
+            </div>
+        </th>
+    </tr>
+    </thead>
+</table>
+<a class="dropdown-item" href="/dodaj/">Dodaj przepis</a>
+<a class="dropdown-item" href="/ranking" >Ranking</a>
+
+<div th:if="${cat !=null }">
+    <div th:text="${cat.categoryName}"></div>
+    <img th:src="${cat.image}" class="img-thumbnail" width="200" height="200">
+    <span th:text="${cat.descriptionn}"></span>
+
+</div>
+
+<table  class="table">
+    <thead class="thead-dark" width="500 px">
+    <tr>
+        <th scope="col" width="500 px">Nazwa</th>
+        <th scope="col" width="500 px">Ile osob</th>
+        <th scope="col" width="500 px">Czas przygotowania</th>
+    </tr>
+    </thead>
+    <tbody width="500 px">
+
+    <tr th:each="recip : ${recipes}">
+        <td><a th:href="'recipe/' + ${recip.id}" th:text="| ${recip.name}|"></a></td>
+        <td><a th:href="'recipe/' + ${recip.id}" th:text="| ${recip.person}|"></a></td>
+        <td><a th:href="'recipe/' + ${recip.id}" th:text="| ${recip.prepareTime}|"></a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

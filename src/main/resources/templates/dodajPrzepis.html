@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments::head">
+    <meta charset="UTF-8">
+    <title>Dodaj przepis</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<h1>Dodaj przepis</h1>
+<form method="post" action="/dodaj" th:object="${recipe}">
+    <div class="form-group">
+        <label for="name">Nazwa przepisu</label>
+        <input th:if="${recipe.id == null}" type="text" th:field="*{name}" placeholder="Nazwa" id="name">
+        <input th:if="${recipe.id != null}" disabled type="text" th:field="*{name}" id="name">
+    </div>
+    <div class="form-group">
+        <label for="recipe">Przepis</label>
+        <textarea class="form-control" rows="3" th:if="${recipe.id == null}" type="text" th:field="*{description}" placeholder="Wpisz przepis" id="recipe"></textarea>
+        <textarea class="form-control" rows="3" th:if="${recipe.id != null}" disabled type="" th:field="*{description}" id="recipe" ></textarea>
+    </div>
+    <div class="form-group">
+        <label for="time">Czas przygotowania</label>
+        <input th:if="${recipe.id == null}" type="number" th:field="*{prepareTime}" placeholder="Czas na pzygotowanie(min)" id="time">
+        <input th:if="${recipe.id != null}" disabled type="number" th:field="*{prepareTime}" placeholder="Czas na pzygotowanie(min)" id="time">
+    </div>
+    <div class="form-group">
+        <label for="qty">Ilość osób</label>
+        <input th:if="${recipe.id == null}" type="number" th:field="*{person}" placeholder="Dla ilu osób porcja" id="qty">
+        <input th:if="${recipe.id != null}" disabled type="number" th:field="*{person}" placeholder="Dla ilu osób porcja" id="qty">
+    </div>
+    <input type="hidden" th:field="*{rating}" value="0" >
+    <div class="form-group">
+        <label for="cat">Kategoria</label>
+        <select th:if="${recipe.id == null}" class="custom-select" th:field="*{category}" id="cat">
+            <option th:each="cat: ${categories}" th:text="${cat.categoryName}" th:value="${cat.name()}"></option>
+        </select>
+        <select th:if="${recipe.id != null}" disabled class="custom-select" th:field="*{category}" id="cat">
+            <option th:each="cat: ${categories}" th:text="${cat.categoryName}" th:value="${cat.name()}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+    <input th:if="${recipe.id == null}" type="submit" value="Dodaj"/>
+    </div>
+    <div class="form-group">
+        <a  th:if="${recipe.id != null}" th:href="|/dodajSkladnik?przepis=${recipe.id}|">Dodaj skladnik</a>
+    </div>
+
+    <ol th:if="${recipe.id != null}">
+        <div class="form-group">Składniki
+            <li th:each="component: ${recipe.components}" th:text="|${component.componentName} ${component.quantity}|">
+            </li>
+        </div>
+    </ol>
+
+
+</body>
+</html>
